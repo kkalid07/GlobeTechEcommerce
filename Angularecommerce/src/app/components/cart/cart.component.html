@@ -1,0 +1,56 @@
+<section class="cart-container">
+  <div *ngIf="isLoading" class="loading">Loading cart...</div>
+  
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error">
+    <div class="cart-items">
+      <!-- Update this line -->
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <div class="cart-item-image">
+         <img [src]="item.image" 
+         [alt]="item.product_title"
+         (error)="handleImageError($event, item)"
+         class="item-image">
+        </div>
+        
+        <div class="item-info">
+          <h3 class="item-title">{{ item.product_title }}</h3>
+          <div class="price-info">
+            <span class="price">{{ item.price | currency:'TND ' }}</span>
+            <span class="quantity">x {{ item.quantity }}</span>
+          </div>
+        </div>
+
+        <div class="item-actions">
+          <button (click)="removeItem(item.id)" class="remove-btn">
+            &times;
+          </button>
+          
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      Your cart is empty
+    </div>
+
+    <div *ngIf="cartItems.length > 0" class="cart-summary">
+      <div class="summary-card">
+        <h2>Cart Summary</h2>
+        
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>{{ total | currency:'TND ' }}</span>
+        </div>
+        
+        <button (click)="navigateToCheckout()" class="checkout-btn">
+  Proceed to Checkout
+</button>
+        <!-- ... rest of template ... -->
+      </div>
+    </div>
+  </div>
+</section>

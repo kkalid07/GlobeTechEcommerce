@@ -1,0 +1,76 @@
+<section class="product-details">
+  <div *ngIf="isLoading" class="loading">Loading product details...</div>
+  
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="product$ | async as product" class="product-container">
+    <div class="product-image-container">
+  <!-- Main Image Display -->
+  <div class="main-image-wrapper">
+    <img [src]="product.image" 
+         [alt]="product.title"
+         (error)="handleImageError($event)"
+         class="main-product-image"
+         [class.hidden]="imageError">
+    
+    <div *ngIf="imageError" class="image-fallback">
+      <div class="fallback-content">
+        <span>Image not available</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Image Zoom Feature (Optional) -->
+  <div class="image-zoom" *ngIf="!imageError && enableZoom" 
+       [style.background-image]="'url(' + product.image + ')'"
+       [style.left.px]="zoomPosition.x"
+       [style.top.px]="zoomPosition.y"
+       [style.display]="isZooming ? 'block' : 'none'">
+  </div>
+
+</div>
+    
+    <div class="product-info">
+      <h1 class="product-title">{{ product.title }}</h1>
+      
+      <div class="price-section">
+        <span class="current-price">{{ product.discount_price | currency:'TND ' }}</span>
+        <span *ngIf="product.discount_price" class="discount-price">
+          {{ product.price | currency:'TND ' }}
+        </span>
+      </div>
+
+      <div class="specifications">
+        <h2>Specifications</h2>
+        <div class="spec-grid">
+          <div class="spec-item" *ngIf="product.screen_size">
+            <span class="spec-label">Screen Size:</span>
+            <span class="spec-value">{{ product.screen_size }}</span>
+          </div>
+          <div class="spec-item" *ngIf="product.processor">
+            <span class="spec-label">Processor:</span>
+            <span class="spec-value">{{ product.processor }}</span>
+          </div>
+          <div class="spec-item" *ngIf="product.ram">
+            <span class="spec-label">RAM:</span>
+            <span class="spec-value">{{ product.ram }}</span>
+          </div>
+          <div class="spec-item" *ngIf="product.ssd_capacity">
+            <span class="spec-label">Storage:</span>
+            <span class="spec-value">{{ product.ssd_capacity }}</span>
+          </div>
+          <!-- Add more specifications as needed -->
+        </div>
+      </div>
+
+      <div class="actions">
+        <button (click)="addToCart(product.id)" class="add-to-cart">
+          Add to Cart
+        </button>
+        <a routerLink="/" class="continue-shopping">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</section>

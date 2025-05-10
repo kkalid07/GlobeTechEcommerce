@@ -1,0 +1,41 @@
+<header>
+  <div class="header-content">
+    <h1 class="logo">Globe Technologies</h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a routerLink="/" class="nav-link">Home</a></li>
+        <li><a routerLink="/cart" class="nav-link">Cart </a></li>
+        <li><a routerLink="/orders" class="nav-link">Orders</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>About Us</h4>
+      <p>Your premier destination for tech gadgets and electronics.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/cart">Cart</a></li>
+        <li><a routerLink="/orders">Orders</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>Email: contact&#64;GlobeTechnologies.com</p>
+      <p>Phone: +216 12 345 678</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 GlobeTechnologies. All rights reserved.</p>
+  </div>
+</footer>

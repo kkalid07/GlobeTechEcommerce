@@ -1,0 +1,29 @@
+<section class="products-section">
+  <div *ngIf="isLoading" class="loading">Loading products...</div>
+  
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="product-grid">
+    <div *ngFor="let product of products$ | async" class="product-card">
+      <img [src]="product.image" 
+     [alt]="product.title"
+     (error)="handleImageError($event)"
+     class="product-image">
+<div *ngIf="imageError" class="image-placeholder">
+  <span>Image not available</span>
+</div>
+      <div class="product-info">
+        <h3 class="product-title">{{ product.title }}</h3>
+        <div class="price-container">
+          <span class="current-price">{{ product.discount_price | currency:'TND ' }}</span>
+          <span *ngIf="product.discount_price" class="discount-price">
+            {{ product.price | currency:'TND ' }}
+          </span>
+        </div>
+        <a [routerLink]="['/products', product.id]" class="view-details">View Details</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,2 @@
+https://dashboard.stripe.com/apikeys
+https://dashboard.stripe.com/test/customers
